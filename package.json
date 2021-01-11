@@ -1,7 +1,7 @@
 {
-  "name": "heroku-cra-node",
-  "version": "3.0.0",
-  "description": "How to use create-react-app with a custom Node API on Heroku",
+  "name": "smartappliances",
+  "version": "1.0.0",
+  "description": "The simple servise for home smart appliances",
   "engines": {
     "node": "12.x"
   },
@@ -16,16 +16,17 @@
   "dependencies": {
     "express": "^4.16.4"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mars/heroku-cra-node.git"
-  },
   "keywords": [
     "node",
     "heroku",
     "create-react-app",
     "react"
   ],
-  "license": "MIT",
-  "devDependencies": {}
+  "author": "Nikita Teremovskiy",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11"
+  }
 }
