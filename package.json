@@ -7,14 +7,16 @@
   },
   "scripts": {
     "start": "node lib",
-    "build": "babel server -d lib && cd react-ui/ && npm install && npm run build"
+    "build": "babel server -d lib && cd react-ui/ && npm install && npm run build",
+    "build-f": "cd react-ui/ && npm run build",
+    "build-b": "babel server -d lib"
   },
   "cacheDirectories": [
     "node_modules",
     "react-ui/node_modules"
   ],
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.10",

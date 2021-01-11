@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import './App.css';
+import axios from 'axios';
+import cn from 'classnames';
 
 function App() {
   const [message, setMessage] = useState(null);
@@ -31,34 +32,24 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        { process.env.NODE_ENV === 'production' ?
-            <p>
-              This is a production build from create-react-app.
-            </p>
-          : <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-        }
-        <p>{'« '}<strong>
-          {isFetching
-            ? 'Fetching message from API'
-            : message}
-        </strong>{' »'}</p>
-        <p><a
-          className="App-link"
-          href="https://github.com/mars/heroku-cra-node"
-        >
-          React + Node deployment on Heroku
-        </a></p>
-        <p><a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a></p>
+        <a className='logo' href='/'>
+          <i className='icon-logo'/>
+          <h1>SmartAppliances</h1>
+        </a>
       </header>
+      <div className="card-group">
+        <div className="card">
+          <div className="card-img-container">
+            <img src="./__fixtures__/images/wash_machine_EW8F1R48B_1.jpg" className="card-img-top" alt="wash machine EW8F1R48B"/>
+          </div>
+          <div className="card-body">
+            <h4 className="card-title">Wash Machine</h4>
+            <p className="card-text"><b>name:</b> in bathroom</p>
+            <p className="card-text"><b>state:</b> <span className="state">washing</span></p>
+            <a href="#" className="btn btn-primary">Manage</a>
+          </div>
+        </div>
+      </div>
     </div>
   );
 
