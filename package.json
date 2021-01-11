@@ -6,8 +6,8 @@
     "node": "12.x"
   },
   "scripts": {
-    "start": "node server",
-    "build": "cd react-ui/ && npm install && npm run build"
+    "start": "node lib",
+    "build": "babel server -d lib && cd react-ui/ && npm install && npm run build"
   },
   "cacheDirectories": [
     "node_modules",
@@ -16,17 +16,11 @@
   "dependencies": {
     "express": "^4.16.4"
   },
-  "keywords": [
-    "node",
-    "heroku",
-    "create-react-app",
-    "react"
-  ],
-  "author": "Nikita Teremovskiy",
-  "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11"
-  }
+  },
+  "author": "Nikita Teremovskiy",
+  "license": "ISC"
 }
