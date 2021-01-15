@@ -37,13 +37,24 @@ h1 {
   margin: 15px;
 }
 
-.card-group {
-  margin: 15px;
-  display: inline-flex;
+.breadcrumb-main {
+  margin: 0 15px;
+  --bs-breadcrumb-divider: '>';
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .card {
+  margin: 15px;
   width: 18rem;
+}
+
+.card-body {
+  justify-content: center;
 }
 
 .card-img-container {
@@ -59,6 +70,46 @@ h1 {
   width: auto;
 }
 
-.state {
+.green {
   color: green;
+}
+
+.breadcrumb-item {
+  font-size: 1.5rem;
+}
+
+.my-btn-home {
+  padding: 0;
+  border: none;
+  font-size: 1.5rem;
+  color: #6c757d;
+  vertical-align: unset;
+}
+
+.my-btn-home:hover {
+  color: #3b4044;
+}
+
+.flex {
+  display: block;
+}
+
+.plus {
+  font-size: 200px;
+  opacity: .2;
+  text-align: center;
+  margin-top: -20px;
+  margin-bottom: 38px;
+}
+
+.appliance-img-container {
+  display: flex;
+  justify-content: center;
+}
+
+.appliance-img-container > img {
+  max-width: 100%;
+  max-height: 500px;
+  width: auto;
+  height: auto;
 }
