@@ -1,12 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import _ from 'lodash';
 import Card from './Card';
 import Appliance from './Appliance';
 import NewAppliance from './NewAppliance';
 
 export default function App() {
-  const [url, setUrl] = useState('/api');
+  const url = '/api';
   const [cards, setCards] = useState(null);
   const [applianceId, toggleToAppliance] = useState(null);
   const [newAppl, addNewAppliance] = useState(false);
