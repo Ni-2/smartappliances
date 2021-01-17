@@ -61,6 +61,27 @@ if (!isDev && cluster.isMaster) {
     res.json(myAppliancesData);
   });
 
+  app.post('/api/newDescription', (req, res) => {
+    const data = req.body;
+    const parsedData = JSON.parse(Object.keys(data)[0]);
+    const { description, id } = parsedData;
+
+    const myAppliancesJson = fs.readFileSync(myAppliancesFileName, 'utf-8');
+    const myAppliances = JSON.parse(myAppliancesJson);
+    const allSerialsJson = fs.readFileSync(allSerialsFileName, 'utf-8');
+    const allSerials = JSON.parse(allSerialsJson);
+
+    myAppliances[id].usersDescription = description;
+    fs.writeFileSync(myAppliancesFileName, JSON.stringify(myAppliances, null, 4), 'utf-8');
+
+    const myAppliancesData = Object.keys(myAppliances).reduce((acc, key) => {
+      const applState = allSerials[key].status;
+      return { ...acc, [key]: { ...myAppliances[key], applState } };
+    }, {});
+    res.set('Content-Type', 'application/json');
+    res.json(myAppliancesData);
+  });
+
   app.post('/api', (req, res) => {
     const data = req.body;
     const parsedData = JSON.parse(Object.keys(data)[0]);

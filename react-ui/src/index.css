@@ -37,6 +37,10 @@ h1 {
   margin: 15px;
 }
 
+h2 {
+  font-size: 3rem;
+}
+
 .breadcrumb-main {
   margin: 0 15px;
   --bs-breadcrumb-divider: '>';
@@ -109,6 +113,19 @@ h1 {
   display: flex;
 }
 
+.al-i-base {
+  align-items: baseline;
+}
+
+.m-1rem {
+  margin: 1rem;
+}
+
+.m-lr-1rem {
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+
 .btn-plus {
   background-color: white;
   border: none;
@@ -156,4 +173,17 @@ h1 {
   justify-content: center;
   align-items: center;
   height: 60vh;
+}
+
+.appliance-state {
+  font-size: 1.1rem;
+  margin: 1.5rem 1rem 0 1rem;
+}
+
+.f-s-1-1rem {
+  font-size: 1.1rem;
+}
+
+.m-t-1rem {
+  margin-top: 1rem;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Card(props) {
-  const { name, customName, applState, image } = props.value;
+  const { name, usersDescription, applState, image } = props.value;
   const { id, toggleToAppliance } = props;
   return (
     <div className="card">
@@ -12,10 +12,12 @@ export default function Card(props) {
         <button className="btn btn-link my-btn-card" onClick={() => toggleToAppliance(id)}>
           <h4 className="card-title">{name}</h4>
         </button>
-        <p className="card-text">
-          <b>name: </b>
-          {customName}
-        </p>
+        {usersDescription && (
+          <p className="text">
+            <b>description: </b>
+            {usersDescription}
+          </p>
+        )}
         <p className="card-text">
           <b>state: </b>
           <span className="green">{applState}</span>
