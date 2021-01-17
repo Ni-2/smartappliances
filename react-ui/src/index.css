@@ -84,22 +84,55 @@ h1 {
   font-size: 1.5rem;
   color: #6c757d;
   vertical-align: unset;
+  text-decoration: none;
 }
 
 .my-btn-home:hover {
   color: #3b4044;
 }
 
+.my-btn-card {
+  padding: 0;
+  border: none;
+  font-size: 1.5rem;
+  color: #212529;
+  vertical-align: unset;
+  text-decoration: none;
+}
+
+.my-btn-card:hover {
+  color: black;
+  text-decoration: underline;
+}
+
 .flex {
-  display: block;
+  display: flex;
+}
+
+.btn-plus {
+  background-color: white;
+  border: none;
 }
 
 .plus {
   font-size: 200px;
-  opacity: .2;
   text-align: center;
-  margin-top: -20px;
-  margin-bottom: 38px;
+  margin-top: -100px;
+  color: #a5b2be;
+}
+
+.btn-plus:hover > .plus {
+  color: #6c757d;
+}
+
+.plus-add {
+  text-align: center;
+  margin-top: -60px;
+  color: #6c757d;
+}
+
+.btn-plus:hover > .plus-add {
+  color: #3b4044;
 }
 
 .appliance-img-container {
@@ -112,4 +145,15 @@ h1 {
   max-height: 500px;
   width: auto;
   height: auto;
+}
+
+.new-appl-form {
+  max-width: 400px;
+}
+
+.new-appliance-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
 }
