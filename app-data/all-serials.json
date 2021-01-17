@@ -1,0 +1,16 @@
+{
+    "123456": {
+        "model": "EW8F1R48B",
+        "status": "is washing"
+    },
+    "098765": {
+        "model": "KOAAS31WT",
+        "status": "is cooking"
+    },
+    "232323": {
+        "model": "EW8F1R48B"
+    },
+    "343434": {
+        "model": "KOAAS31WT"
+    }
+}
