@@ -1,6 +1,5 @@
 const express = require('express');
 const fsp = require('fs/promises');
-const regeneratorRuntime = require('regenerator-runtime');
 const path = require('path');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
