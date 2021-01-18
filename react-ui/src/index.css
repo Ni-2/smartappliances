@@ -187,3 +187,15 @@ h2 {
 .m-t-1rem {
   margin-top: 1rem;
 }
+
+.disp-i-b {
+  display: inline-block;
+}
+
+.color-unset {
+  color: unset;
+}
+
+.pad-rev {
+  padding: revert;
+}
