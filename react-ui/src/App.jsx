@@ -64,7 +64,7 @@ export default function App() {
                 </ol>
               </nav>
               <main className="new-appliance-form">
-                <NewAppliance url={url} setCards={setCards} addNewAppliance={addNewAppliance} />
+                <NewAppliance url={url} setCards={setCards} addNewAppliance={addNewAppliance} toggleToAppliance={toggleToAppliance} />
               </main>
             </>
             ) : (

@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import path from 'path';
 import _ from 'lodash';
+// eslint-disable-next-line no-unused-vars
 import { Collapse } from 'bootstrap';
 
 export default function Appliance(props) {
@@ -12,8 +13,9 @@ export default function Appliance(props) {
 
   const handleDeleteAppl = async (e) => {
     e.preventDefault();
-    const updatedCards = await axios.post(path.resolve(url, 'delete'), { serial: id }, {
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    const updatedCards = await axios.delete(url, {
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      params: { serial: id }
     });
     toggleToAppliance(null);
     setCards(updatedCards.data);
@@ -21,7 +23,7 @@ export default function Appliance(props) {
 
   const handleChangeDescription = async (e) => {
     e.preventDefault();
-    const updatedCards = await axios.post(path.resolve(url, 'newDescription'), { description, id }, {
+    const updatedCards = await axios.put(path.resolve(url, 'newDescription'), { description, id }, {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     });
     setCards(updatedCards.data);
