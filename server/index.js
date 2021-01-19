@@ -1,10 +1,10 @@
 import express from 'express';
 import { promises as fsp } from 'fs';
 import path from 'path';
-import _  from 'lodash';
-import sendTaskToDevice from './sendTaskToDevice';
+import _ from 'lodash';
 import cluster from 'cluster';
 import os from 'os';
+import sendTaskToDevice from './sendTaskToDevice';
 
 const isDev = process.env.NODE_ENV !== 'production';
 const numCPUs = os.cpus().length;
@@ -33,14 +33,14 @@ if (!isDev && cluster.isMaster) {
 
   app.use(express.json()); // for parsing application/json
   app.use(express.urlencoded({ extended: false })); // for parsing application/x-www-form-urlencoded
-  
+
   // Get absolute name of json keeping data of users appliances
   const allAppliancesFileName = path.resolve(__dirname, '../app-data/all-appliances.json');
   const allSerialsFileName = path.resolve(__dirname, '../app-data/all-serials.json');
   const myAppliancesFileName = path.resolve(__dirname, '../app-data/my-appliances.json');
 
   // Wrap function with async/await syntax
-  const wrap = fn => (...args) => fn(...args).catch(args[2]);
+  const wrap = (fn) => (...args) => fn(...args).catch(args[2]);
 
   // Answer API requests.
   app.delete('/api', wrap(async (req, res) => {
@@ -117,7 +117,7 @@ if (!isDev && cluster.isMaster) {
 
     const allSerialsJson = await fsp.readFile(allSerialsFileName, 'utf-8');
     const allSerials = JSON.parse(allSerialsJson);
-    const allAppliancesJson  = await fsp.readFile(allAppliancesFileName, 'utf-8');
+    const allAppliancesJson = await fsp.readFile(allAppliancesFileName, 'utf-8');
     const allAppliances = JSON.parse(allAppliancesJson);
     const myAppliancesJson = await fsp.readFile(myAppliancesFileName, 'utf-8');
     const myAppliances = JSON.parse(myAppliancesJson);
@@ -125,7 +125,7 @@ if (!isDev && cluster.isMaster) {
     if (!_.has(allSerials, serial)) {
       res.status(204);
       res.end();
-    } else if(_.has(myAppliances, serial)) {
+    } else if (_.has(myAppliances, serial)) {
       res.status(200);
       res.end('This appliance has already been added earlier.');
     } else {
