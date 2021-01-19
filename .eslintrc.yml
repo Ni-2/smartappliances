@@ -3,6 +3,8 @@ env:
   node: true
 extends:
   - airbnb-base
+  - prettier
+  - prettier/react
 parserOptions:
   ecmaVersion: 11
   sourceType: module

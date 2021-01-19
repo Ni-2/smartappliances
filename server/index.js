@@ -22,7 +22,9 @@ if (!isDev && cluster.isMaster) {
 
   cluster.on('exit', (worker, code, signal) => {
     // eslint-disable-next-line no-console
-    console.error(`Node cluster worker ${worker.process.pid} exited: code ${code}, signal ${signal}`);
+    console.error(
+      `Node cluster worker ${worker.process.pid} exited: code ${code}, signal ${signal}`,
+    );
   });
 } else {
   const app = express();
@@ -43,95 +45,76 @@ if (!isDev && cluster.isMaster) {
   const wrap = (fn) => (...args) => fn(...args).catch(args[2]);
 
   // Answer API requests.
-  app.delete('/api', wrap(async (req, res) => {
-    const url = new URL(req.url, `http://${req.headers.host}`);
-    const serial = url.searchParams.get('serial');
+  app.delete(
+    '/api',
+    wrap(async (req, res) => {
+      const url = new URL(req.url, `http://${req.headers.host}`);
+      const serial = url.searchParams.get('serial');
 
-    const myAppliancesJson = await fsp.readFile(myAppliancesFileName, 'utf-8');
-    const myAppliances = JSON.parse(myAppliancesJson);
-    const allSerialsJson = await fsp.readFile(allSerialsFileName, 'utf-8');
-    const allSerials = JSON.parse(allSerialsJson);
+      const myAppliancesJson = await fsp.readFile(myAppliancesFileName, 'utf-8');
+      const myAppliances = JSON.parse(myAppliancesJson);
+      const allSerialsJson = await fsp.readFile(allSerialsFileName, 'utf-8');
+      const allSerials = JSON.parse(allSerialsJson);
 
-    const updatedMyAppliancesEntries = Object.entries(myAppliances)
-      .filter(([key]) => key !== serial);
-    const updatedMyAppliances = Object.fromEntries(updatedMyAppliancesEntries);
-    await fsp.writeFile(myAppliancesFileName, JSON.stringify(updatedMyAppliances, null, 4), 'utf-8');
+      const updatedMyAppliancesEntries = Object.entries(myAppliances).filter(
+        ([key]) => key !== serial,
+      );
+      const updatedMyAppliances = Object.fromEntries(updatedMyAppliancesEntries);
+      await fsp.writeFile(
+        myAppliancesFileName,
+        JSON.stringify(updatedMyAppliances, null, 4),
+        'utf-8',
+      );
 
-    const myAppliancesData = Object.keys(updatedMyAppliances).reduce((acc, key) => {
-      const applState = allSerials[key].status;
-      return { ...acc, [key]: { ...updatedMyAppliances[key], applState } };
-    }, {});
-    res.set('Content-Type', 'application/json');
-    res.status(200);
-    res.json(myAppliancesData);
-  }));
-
-  app.put('/api/newDescription', wrap(async (req, res) => {
-    const data = req.body;
-    const parsedData = JSON.parse(Object.keys(data)[0]);
-    const { description, id } = parsedData;
-
-    const myAppliancesJson = await fsp.readFile(myAppliancesFileName, 'utf-8');
-    const myAppliances = JSON.parse(myAppliancesJson);
-    const allSerialsJson = await fsp.readFile(allSerialsFileName, 'utf-8');
-    const allSerials = JSON.parse(allSerialsJson);
-
-    myAppliances[id].usersDescription = description;
-    await fsp.writeFile(myAppliancesFileName, JSON.stringify(myAppliances, null, 4), 'utf-8');
-
-    const myAppliancesData = Object.keys(myAppliances).reduce((acc, key) => {
-      const applState = allSerials[key].status;
-      return { ...acc, [key]: { ...myAppliances[key], applState } };
-    }, {});
-    res.set('Content-Type', 'application/json');
-    res.status(200);
-    res.json(myAppliancesData);
-  }));
-
-  app.post('/api/newTask', wrap(async (req, res) => {
-    const data = req.body;
-    const parsedData = JSON.parse(Object.keys(data)[0]);
-    const { task, id } = parsedData;
-
-    const isTaskAccepted = sendTaskToDevice(id, task);
-    if (!isTaskAccepted) throw new Error('The task was not accepted by appliance!');
-
-    const allSerialsJson = await fsp.readFile(allSerialsFileName, 'utf-8');
-    const allSerials = JSON.parse(allSerialsJson);
-    const myAppliancesJson = await fsp.readFile(myAppliancesFileName, 'utf-8');
-    const myAppliances = JSON.parse(myAppliancesJson);
-
-    const myAppliancesData = Object.keys(myAppliances).reduce((acc, key) => {
-      const applState = allSerials[key].status;
-      return { ...acc, [key]: { ...myAppliances[key], applState } };
-    }, {});
-    res.set('Content-Type', 'application/json');
-    res.status(201);
-    res.json(myAppliancesData);
-  }));
-
-  app.post('/api', wrap(async (req, res) => {
-    const data = req.body;
-    const parsedData = JSON.parse(Object.keys(data)[0]);
-    const { serial } = parsedData;
-
-    const allSerialsJson = await fsp.readFile(allSerialsFileName, 'utf-8');
-    const allSerials = JSON.parse(allSerialsJson);
-    const allAppliancesJson = await fsp.readFile(allAppliancesFileName, 'utf-8');
-    const allAppliances = JSON.parse(allAppliancesJson);
-    const myAppliancesJson = await fsp.readFile(myAppliancesFileName, 'utf-8');
-    const myAppliances = JSON.parse(myAppliancesJson);
-
-    if (!_.has(allSerials, serial)) {
-      res.status(204);
-      res.end();
-    } else if (_.has(myAppliances, serial)) {
+      const myAppliancesData = Object.keys(updatedMyAppliances).reduce((acc, key) => {
+        const applState = allSerials[key].status;
+        return { ...acc, [key]: { ...updatedMyAppliances[key], applState } };
+      }, {});
+      res.set('Content-Type', 'application/json');
       res.status(200);
-      res.end('This appliance has already been added earlier.');
-    } else {
-      const { model } = allSerials[serial];
-      myAppliances[serial] = { ...allAppliances[model], model };
+      res.json(myAppliancesData);
+    }),
+  );
+
+  app.put(
+    '/api/newDescription',
+    wrap(async (req, res) => {
+      const data = req.body;
+      const parsedData = JSON.parse(Object.keys(data)[0]);
+      const { description, id } = parsedData;
+
+      const myAppliancesJson = await fsp.readFile(myAppliancesFileName, 'utf-8');
+      const myAppliances = JSON.parse(myAppliancesJson);
+      const allSerialsJson = await fsp.readFile(allSerialsFileName, 'utf-8');
+      const allSerials = JSON.parse(allSerialsJson);
+
+      myAppliances[id].usersDescription = description;
       await fsp.writeFile(myAppliancesFileName, JSON.stringify(myAppliances, null, 4), 'utf-8');
+
+      const myAppliancesData = Object.keys(myAppliances).reduce((acc, key) => {
+        const applState = allSerials[key].status;
+        return { ...acc, [key]: { ...myAppliances[key], applState } };
+      }, {});
+      res.set('Content-Type', 'application/json');
+      res.status(200);
+      res.json(myAppliancesData);
+    }),
+  );
+
+  app.post(
+    '/api/newTask',
+    wrap(async (req, res) => {
+      const data = req.body;
+      const parsedData = JSON.parse(Object.keys(data)[0]);
+      const { task, id } = parsedData;
+
+      const isTaskAccepted = sendTaskToDevice(id, task);
+      if (!isTaskAccepted) throw new Error('The task was not accepted by appliance!');
+
+      const allSerialsJson = await fsp.readFile(allSerialsFileName, 'utf-8');
+      const allSerials = JSON.parse(allSerialsJson);
+      const myAppliancesJson = await fsp.readFile(myAppliancesFileName, 'utf-8');
+      const myAppliances = JSON.parse(myAppliancesJson);
 
       const myAppliancesData = Object.keys(myAppliances).reduce((acc, key) => {
         const applState = allSerials[key].status;
@@ -140,23 +123,62 @@ if (!isDev && cluster.isMaster) {
       res.set('Content-Type', 'application/json');
       res.status(201);
       res.json(myAppliancesData);
-    }
-  }));
+    }),
+  );
 
-  app.get('/api', wrap(async (req, res) => {
-    const myAppliancesJson = await fsp.readFile(myAppliancesFileName, 'utf-8');
-    const myAppliances = JSON.parse(myAppliancesJson);
-    const allSerialsJson = await fsp.readFile(allSerialsFileName, 'utf-8');
-    const allSerials = JSON.parse(allSerialsJson);
+  app.post(
+    '/api',
+    wrap(async (req, res) => {
+      const data = req.body;
+      const parsedData = JSON.parse(Object.keys(data)[0]);
+      const { serial } = parsedData;
 
-    const myAppliancesData = Object.keys(myAppliances).reduce((acc, key) => {
-      const applState = allSerials[key].status;
-      return { ...acc, [key]: { ...myAppliances[key], applState } };
-    }, {});
-    res.set('Content-Type', 'application/json');
-    res.status(200);
-    res.json(myAppliancesData);
-  }));
+      const allSerialsJson = await fsp.readFile(allSerialsFileName, 'utf-8');
+      const allSerials = JSON.parse(allSerialsJson);
+      const allAppliancesJson = await fsp.readFile(allAppliancesFileName, 'utf-8');
+      const allAppliances = JSON.parse(allAppliancesJson);
+      const myAppliancesJson = await fsp.readFile(myAppliancesFileName, 'utf-8');
+      const myAppliances = JSON.parse(myAppliancesJson);
+
+      if (!_.has(allSerials, serial)) {
+        res.status(204);
+        res.end();
+      } else if (_.has(myAppliances, serial)) {
+        res.status(200);
+        res.end('This appliance has already been added earlier.');
+      } else {
+        const { model } = allSerials[serial];
+        myAppliances[serial] = { ...allAppliances[model], model };
+        await fsp.writeFile(myAppliancesFileName, JSON.stringify(myAppliances, null, 4), 'utf-8');
+
+        const myAppliancesData = Object.keys(myAppliances).reduce((acc, key) => {
+          const applState = allSerials[key].status;
+          return { ...acc, [key]: { ...myAppliances[key], applState } };
+        }, {});
+        res.set('Content-Type', 'application/json');
+        res.status(201);
+        res.json(myAppliancesData);
+      }
+    }),
+  );
+
+  app.get(
+    '/api',
+    wrap(async (req, res) => {
+      const myAppliancesJson = await fsp.readFile(myAppliancesFileName, 'utf-8');
+      const myAppliances = JSON.parse(myAppliancesJson);
+      const allSerialsJson = await fsp.readFile(allSerialsFileName, 'utf-8');
+      const allSerials = JSON.parse(allSerialsJson);
+
+      const myAppliancesData = Object.keys(myAppliances).reduce((acc, key) => {
+        const applState = allSerials[key].status;
+        return { ...acc, [key]: { ...myAppliances[key], applState } };
+      }, {});
+      res.set('Content-Type', 'application/json');
+      res.status(200);
+      res.json(myAppliancesData);
+    }),
+  );
 
   // All remaining requests return the React app, so it can handle routing.
   app.get('*', (request, response) => {
@@ -165,6 +187,8 @@ if (!isDev && cluster.isMaster) {
 
   app.listen(PORT, () => {
     // eslint-disable-next-line no-console
-    console.error(`Node ${isDev ? 'dev server' : `cluster worker ${process.pid}`}: listening on port ${PORT}`);
+    console.error(
+      `Node ${isDev ? 'dev server' : `cluster worker ${process.pid}`}: listening on port ${PORT}`,
+    );
   });
 }

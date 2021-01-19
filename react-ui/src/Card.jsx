@@ -6,7 +6,7 @@ export default function Card(props) {
   return (
     <div className="card">
       <div className="card-img-container">
-        <img src={image} className="card-img-top" alt={name}/>
+        <img src={image} className="card-img-top" alt={name} />
       </div>
       <div className="card-body">
         <button className="btn btn-link my-btn-card" onClick={() => toggleToAppliance(id)}>

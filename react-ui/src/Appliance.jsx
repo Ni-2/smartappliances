@@ -17,7 +17,7 @@ export default function Appliance(props) {
     e.preventDefault();
     const response = await axios.delete(url, {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      params: { serial: id }
+      params: { serial: id },
     });
     toggleToAppliance(null);
     setCards(response.data);
@@ -25,18 +25,26 @@ export default function Appliance(props) {
 
   const handleChangeDescription = async (e) => {
     e.preventDefault();
-    const response = await axios.put(path.resolve(url, 'newDescription'), { description, id }, {
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    });
+    const response = await axios.put(
+      path.resolve(url, 'newDescription'),
+      { description, id },
+      {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      },
+    );
     setCards(response.data);
     collapseRef.current.classList.remove('show');
   };
 
   const handleAddTask = async (e) => {
     e.preventDefault();
-    const response = await axios.post(path.resolve(url, 'newTask'), { task: newTask, id }, {
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    });
+    const response = await axios.post(
+      path.resolve(url, 'newTask'),
+      { task: newTask, id },
+      {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      },
+    );
     const updatedAppliacsesData = response.data;
     setCards(updatedAppliacsesData);
     updateApplState(updatedAppliacsesData[id].status);
@@ -48,7 +56,7 @@ export default function Appliance(props) {
       <div className="row">
         <div className="col-12 col-md-6">
           <div className="appliance-img-container m-t-2rem">
-            <img src={image} className="appliance-img" alt={name}/>
+            <img src={image} className="appliance-img" alt={name} />
           </div>
           <div className="flex m-t-2rem">
             <form className="row" onSubmit={handleAddTask}>
@@ -59,21 +67,23 @@ export default function Appliance(props) {
                 <label for="inputState" className="form-label">
                   <h4>Add task</h4>
                 </label>
-                <select id="inputState" className="form-select" onChange={(e) => setTask(e.target.value)}>
+                <select
+                  id="inputState"
+                  className="form-select"
+                  onChange={(e) => setTask(e.target.value)}
+                >
                   <option selected={!newTask}>Choose...</option>
                   {Object.entries(tasks).map(([task, taskName]) => (
-                    <option
-                      value={task}
-                      key={_.uniqueId()}
-                      selected={task === newTask}
-                    >
+                    <option value={task} key={_.uniqueId()} selected={task === newTask}>
                       {taskName}
                     </option>
                   ))}
                 </select>
               </div>
               <div className="col-12 m-1rem">
-                <button type="submit" className="btn btn-primary">Start</button>
+                <button type="submit" className="btn btn-primary">
+                  Start
+                </button>
               </div>
             </form>
           </div>
@@ -102,11 +112,20 @@ export default function Appliance(props) {
             <div className="flex">
               <form className="row" onSubmit={handleChangeDescription}>
                 <div className="col-auto">
-                  <label for="inputDescription" className="visually-hidden">New description</label>
-                  <input className="form-control" id="inputDescription" placeholder="new description" onChange={(e) => handleInputDescription(e.target.value)} />
+                  <label for="inputDescription" className="visually-hidden">
+                    New description
+                  </label>
+                  <input
+                    className="form-control"
+                    id="inputDescription"
+                    placeholder="new description"
+                    onChange={(e) => handleInputDescription(e.target.value)}
+                  />
                 </div>
                 <div className="col-auto">
-                  <button type="submit" className="btn btn-primary mb-3">{description ? 'Confirm' : 'Without description'}</button>
+                  <button type="submit" className="btn btn-primary mb-3">
+                    {description ? 'Confirm' : 'Without description'}
+                  </button>
                 </div>
               </form>
             </div>
@@ -118,12 +137,18 @@ export default function Appliance(props) {
                 <ul>
                   {Array.isArray(value)
                     ? value.map((v) => <li>{v}</li>)
-                    : Object.entries(value).map(([k, v]) => <li><b>{k}</b> {v}</li>)}
+                    : Object.entries(value).map(([k, v]) => (
+                        <li>
+                          <b>{k}</b> {v}
+                        </li>
+                      ))}
                 </ul>
               </div>
             ))}
           </div>
-          <button type="button" className="btn btn-danger" onClick={handleDeleteAppl}>Delete appliance</button>
+          <button type="button" className="btn btn-danger" onClick={handleDeleteAppl}>
+            Delete appliance
+          </button>
         </div>
       </div>
     </div>
