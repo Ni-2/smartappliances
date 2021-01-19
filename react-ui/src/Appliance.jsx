@@ -40,6 +40,7 @@ export default function Appliance(props) {
     const updatedAppliacsesData = response.data;
     setCards(updatedAppliacsesData);
     updateApplState(updatedAppliacsesData[id].status);
+    setTask(false);
   };
 
   return (
