@@ -2,8 +2,15 @@
     "EW8F1R48B": {
         "name": "Wash Machine",
         "image": "static/images/wash_machine_PerfectCare_800_EW8F1R48B_1.jpg",
+        "tasks": {
+            "cotton": "Хлопок",
+            "cotton-eco": "Хлопок Эко",
+            "synthetic": "Синтетика",
+            "delicate": "Деликатная стирка",
+            "wool": "Шерсть (паром)"
+        },
         "info": {
-            "Детали": [
+            "Характеристики": [
                 "Программа для стирки шелковых вещей со специально адаптированным циклом стирки и отжима",
                 "Технология Fuzzy Logic",
                 "Функция отложенного старта",
@@ -56,8 +63,22 @@
     "KOAAS31WT": {
         "name": "Oven",
         "image": "static/images/oven_Intuit_900_PRO_KOAAS31WT_1.png",
+        "tasks": {
+            "bottom-heating": "Нижний нагрев",
+            "defrost": "Разморозка",
+            "grill": "Гриль",
+            "grill bottom-heating": "Гриль + нижний нагрев",
+            "grill bottom-heating fan":  "Гриль + нижний нагрев + вентилятор",
+            "turbo-grill":  "Турбо-гриль", 
+            "pizza":  "Пицца", 
+            "convection ring-element":  "Конвекция с кольцевым нагревательным элементом",
+            "steam bottom-heating fan":  "Пар + нижний нагрев + вентилятор",
+            "regeneration":  "Регенерация",
+            "steam ring-element bottom-heating fan":  "Пар + кольцевой элемент + нижний нагрев + вентилятор",
+            "cleaning": "Очистка паром"
+        },
         "info": {
-            "Детали": [
+            "Характеристики": [
                 "Встраиваемый независимый духовой шкаф",
                 "Мультифункциональный духовой шкаф с функцией приготовления на пару",
                 "Термосенсор",
@@ -103,8 +124,16 @@
     "KBC65T": {
         "name": "Coffee Maker",
         "image": "static/images/coffee_machine_KBC65T_1.png",
+        "tasks": {
+            "cappuccino": "капучино",
+            "latte-macchiato": "латте макиато",
+            "flat-white": "флет уайт",
+            "espresso": "эспрессо",
+            "americano":  "американо",
+            "milk":  "молоко"
+        },
         "info": {
-            "Детали": [
+            "Характеристики": [
                 "Встраиваемая кофе-машина",
                 "Подсветка",
                 "Объем кофемолки: 200 гр",

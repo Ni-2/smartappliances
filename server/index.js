@@ -1,11 +1,13 @@
-const express = require('express');
-const fsp = require('fs/promises');
-const path = require('path');
-const cluster = require('cluster');
-const numCPUs = require('os').cpus().length;
-const _ = require('lodash');
+import express from 'express';
+import { promises as fsp } from 'fs';
+import path from 'path';
+import _  from 'lodash';
+import sendTaskToDevice from './sendTaskToDevice';
+import cluster from 'cluster';
+import os from 'os';
 
 const isDev = process.env.NODE_ENV !== 'production';
+const numCPUs = os.cpus().length;
 const PORT = process.env.PORT || 5000;
 
 // Multi-process to utilize all CPU cores.
@@ -83,6 +85,28 @@ if (!isDev && cluster.isMaster) {
     }, {});
     res.set('Content-Type', 'application/json');
     res.status(200);
+    res.json(myAppliancesData);
+  }));
+
+  app.post('/api/newTask', wrap(async (req, res) => {
+    const data = req.body;
+    const parsedData = JSON.parse(Object.keys(data)[0]);
+    const { task, id } = parsedData;
+
+    const isTaskAccepted = sendTaskToDevice(id, task);
+    if (!isTaskAccepted) throw new Error('The task was not accepted by appliance!');
+
+    const allSerialsJson = await fsp.readFile(allSerialsFileName, 'utf-8');
+    const allSerials = JSON.parse(allSerialsJson);
+    const myAppliancesJson = await fsp.readFile(myAppliancesFileName, 'utf-8');
+    const myAppliances = JSON.parse(myAppliancesJson);
+
+    const myAppliancesData = Object.keys(myAppliances).reduce((acc, key) => {
+      const applState = allSerials[key].status;
+      return { ...acc, [key]: { ...myAppliances[key], applState } };
+    }, {});
+    res.set('Content-Type', 'application/json');
+    res.status(201);
     res.json(myAppliancesData);
   }));
 

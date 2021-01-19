@@ -1,19 +1,19 @@
 {
     "101": {
         "model": "EW8F1R48B",
-        "status": "is washing"
+        "status": "available"
     },
     "102": {
         "model": "EW8F1R48B",
-        "status": "available"
+        "status": "in operation"
     },
     "103": {
         "model": "EW8F1R48B",
-        "status": "available"
+        "status": "in operation"
     },
     "201": {
         "model": "KOAAS31WT",
-        "status": "is cooking"
+        "status": "available"
     },
     "202": {
         "model": "KOAAS31WT",
@@ -21,11 +21,11 @@
     },
     "203": {
         "model": "KOAAS31WT",
-        "status": "is cooking"
+        "status": "available"
     },
     "301": {
         "model": "KBC65T",
-        "status": "is making espresso"
+        "status": "available"
     },
     "302": {
         "model": "KBC65T",
