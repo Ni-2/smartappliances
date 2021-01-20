@@ -1,4 +1,4 @@
-#!/usr/server/bin/env node
+#!/usr/bin/env node
 
 import cluster from 'cluster';
 import os from 'os';
