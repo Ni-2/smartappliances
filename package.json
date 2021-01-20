@@ -6,7 +6,7 @@
     "node": "14.x"
   },
   "scripts": {
-    "start": "node lib",
+    "start": "node lib/bin",
     "build": "babel server -d lib && cd react-ui/ && npm install && npm run build",
     "build-f": "cd react-ui/ && npm run build",
     "build-b": "babel server -d lib"

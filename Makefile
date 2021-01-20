@@ -5,4 +5,4 @@ prettier:
 	npx prettier --write .
 
 run:
-	nodemon --watch react-ui/build ./lib
+	nodemon --watch react-ui/build ./lib/bin
