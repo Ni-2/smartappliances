@@ -8,6 +8,7 @@ npm-debug.log
 .DS_Store
 /lib
 .prettierignore
+coverage
 
 # Docker
 Dockerfile
