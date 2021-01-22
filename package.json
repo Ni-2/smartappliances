@@ -10,7 +10,7 @@
     "build": "babel server -d lib && cd react-ui/ && npm install && npm run build",
     "build-f": "cd react-ui/ && npm run build",
     "build-b": "babel server -d lib",
-    "test": "jest ./__tests__"
+    "test": "jest"
   },
   "cacheDirectories": [
     "node_modules",
@@ -24,6 +24,8 @@
   "devDependencies": {
     "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
+    "@babel/plugin-syntax-jsx": "^7.12.1",
+    "@babel/plugin-transform-react-jsx": "^7.12.12",
     "@babel/plugin-transform-runtime": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "eslint": "^7.18.0",
@@ -31,6 +33,7 @@
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-import": "^2.22.1",
     "jest": "^26.6.0",
+    "mock-fs": "^4.13.0",
     "prettier": "2.2.1",
     "supertest": "^6.1.1"
   },

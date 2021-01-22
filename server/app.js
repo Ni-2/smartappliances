@@ -34,16 +34,11 @@ const updateAppDataFile = (filename, data) => {
   fsp.writeFile(getAppDataPath(filename), stringifiedData);
 };
 
-const unitDataAndStatuses = (appliances, serials) =>
-  Object.keys(appliances).reduce((acc, key) => {
+const unitDataAndStatuses = (myAppliances, serials) =>
+  Object.keys(myAppliances).reduce((acc, key) => {
     const applState = serials[key].status;
-    return { ...acc, [key]: { ...appliances[key], applState } };
+    return { ...acc, [key]: { ...myAppliances[key], applState } };
   }, {});
-
-const getBodyData = (req) => {
-  const data = req.body;
-  return JSON.parse(Object.keys(data)[0]);
-};
 
 // Wrap function with async/await syntax
 const wrap = (fn) => (...args) => fn(...args).catch(args[2]);
@@ -72,7 +67,7 @@ app.delete(
 app.put(
   '/api/newDescription',
   wrap(async (req, res) => {
-    const { description, id } = getBodyData(req);
+    const { description, id } = req.body;
     const [allSerials, myAppliances] = await getAppData(allSerialsFileName, myAppliancesFileName);
 
     myAppliances[id].usersDescription = description;
@@ -88,7 +83,7 @@ app.put(
 app.post(
   '/api/newTask',
   wrap(async (req, res) => {
-    const { task, id } = getBodyData(req);
+    const { task, id } = req.body;
 
     const isTaskAccepted = sendTaskToDevice(id, task);
     if (!isTaskAccepted) throw new Error('The task was not accepted by appliance!');
@@ -105,7 +100,7 @@ app.post(
 app.post(
   '/api',
   wrap(async (req, res) => {
-    const { serial } = getBodyData(req);
+    const { serial } = req.body;
 
     const [allAppliances, allSerials, myAppliances] = await getAppData(
       allAppliancesFileName,
@@ -118,6 +113,7 @@ app.post(
       res.end();
     } else if (_.has(myAppliances, serial)) {
       res.status(200);
+      res.set('Content-Type', 'text/plain');
       res.end('This appliance has already been added earlier.');
     } else {
       const { model } = allSerials[serial];

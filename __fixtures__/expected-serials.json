@@ -10,5 +10,29 @@
   "103": {
     "model": "EW8F1R48B",
     "status": "in operation"
+  },
+  "201": {
+    "model": "KOAAS31WT",
+    "status": "available"
+  },
+  "202": {
+    "model": "KOAAS31WT",
+    "status": "available"
+  },
+  "203": {
+    "model": "KOAAS31WT",
+    "status": "available"
+  },
+  "301": {
+    "model": "KBC65T",
+    "status": "available"
+  },
+  "302": {
+    "model": "KBC65T",
+    "status": "available"
+  },
+  "303": {
+    "model": "KBC65T",
+    "status": "available"
   }
 }

@@ -16,7 +16,7 @@ export default function Appliance(props) {
   const handleDeleteAppl = async (e) => {
     e.preventDefault();
     const response = await axios.delete(url, {
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      headers: { 'Content-Type': 'application/json' },
       params: { serial: id },
     });
     toggleToAppliance(null);
@@ -29,7 +29,7 @@ export default function Appliance(props) {
       path.resolve(url, 'newDescription'),
       { description, id },
       {
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        headers: { 'Content-Type': 'application/json' },
       },
     );
     setCards(response.data);
@@ -42,7 +42,7 @@ export default function Appliance(props) {
       path.resolve(url, 'newTask'),
       { task: newTask, id },
       {
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        headers: { 'Content-Type': 'application/json' },
       },
     );
     const updatedAppliacsesData = response.data;

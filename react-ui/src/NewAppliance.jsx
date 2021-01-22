@@ -15,7 +15,7 @@ export default function NewAppliance(props) {
       url,
       { serial },
       {
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        headers: { 'Content-Type': 'application/json' },
       },
     );
     if (!response.data) {

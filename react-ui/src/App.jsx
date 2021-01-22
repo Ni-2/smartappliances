@@ -12,7 +12,7 @@ export default function App() {
 
   const getData = async () => {
     const newParams = await axios.get(url, {
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      headers: { 'Content-Type': 'application/json' },
     });
     setCards(newParams.data);
   };
