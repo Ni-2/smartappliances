@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders form 1`] = `
+<div
+  className="new-appliance-form"
+>
+  <form
+    className="new-appl-form"
+    onSubmit={[Function]}
+  >
+    <legend>
+      New appliance
+    </legend>
+    <div
+      className="mb-3"
+    >
+      <label
+        className="form-label disp-i-b"
+        htmlFor="serialNumber"
+        role="invitation"
+      >
+        Enter serial number
+      </label>
+      <input
+        aria-describedby="serialHelp"
+        className="form-control"
+        id="serialNumber"
+        onChange={[Function]}
+        value=""
+      />
+      <div
+        className="form-text"
+        id="serialHelp"
+      >
+        The serial number of the appliance is on it's back or bottom side and in the attached manual. (( Wash machine: 101, 102, 103; oven: 201, 202, 203; coffee machine: 301, 302, 303 ))
+      </div>
+    </div>
+    <button
+      className="btn btn-primary"
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+`;

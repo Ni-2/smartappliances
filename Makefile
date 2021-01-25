@@ -12,3 +12,6 @@ run:
 
 test-coverage:
 	npm test -- --coverage --coverageProvider=v8
+
+ci:
+	make build && cd ./react-ui && npm run build && cd ../ && make prettier && make lint && make test-coverage

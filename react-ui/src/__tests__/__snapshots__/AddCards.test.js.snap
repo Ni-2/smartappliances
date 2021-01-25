@@ -1,0 +1,167 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders page with 3 cards and [+] 1`] = `
+Array [
+  <nav
+    aria-label="breadcrumb"
+    className="breadcrumb-main"
+  >
+    <ol
+      className="breadcrumb"
+    >
+      <li
+        aria-current="page"
+        className="breadcrumb-item active"
+      >
+        My Smart Appliances
+      </li>
+    </ol>
+  </nav>,
+  <main
+    className="cards"
+  >
+    <div
+      className="card"
+    >
+      <div
+        className="card-img-container"
+      >
+        <img
+          alt="Wash Machine"
+          className="card-img-top"
+          src="static/images/wash_machine_PerfectCare_800_EW8F1R48B_1.jpg"
+        />
+      </div>
+      <div
+        className="card-body"
+      >
+        <button
+          className="btn btn-link my-btn-card"
+          onClick={[Function]}
+        >
+          <h4
+            className="card-title"
+          >
+            Wash Machine
+          </h4>
+        </button>
+        <p
+          className="text"
+        >
+          <b>
+            description: 
+          </b>
+          in my bathroom
+        </p>
+        <p
+          className="card-text"
+        >
+          <b>
+            state: 
+          </b>
+          <span
+            className="green"
+          />
+        </p>
+      </div>
+    </div>
+    <div
+      className="card"
+    >
+      <div
+        className="card-img-container"
+      >
+        <img
+          alt="Oven"
+          className="card-img-top"
+          src="static/images/oven_Intuit_900_PRO_KOAAS31WT_1.png"
+        />
+      </div>
+      <div
+        className="card-body"
+      >
+        <button
+          className="btn btn-link my-btn-card"
+          onClick={[Function]}
+        >
+          <h4
+            className="card-title"
+          >
+            Oven
+          </h4>
+        </button>
+        <p
+          className="card-text"
+        >
+          <b>
+            state: 
+          </b>
+          <span
+            className="green"
+          />
+        </p>
+      </div>
+    </div>
+    <div
+      className="card"
+    >
+      <div
+        className="card-img-container"
+      >
+        <img
+          alt="Coffee Maker"
+          className="card-img-top"
+          src="static/images/coffee_machine_KBC65T_1.png"
+        />
+      </div>
+      <div
+        className="card-body"
+      >
+        <button
+          className="btn btn-link my-btn-card"
+          onClick={[Function]}
+        >
+          <h4
+            className="card-title"
+          >
+            Coffee Maker
+          </h4>
+        </button>
+        <p
+          className="card-text"
+        >
+          <b>
+            state: 
+          </b>
+          <span
+            className="green"
+          />
+        </p>
+      </div>
+    </div>
+    <div
+      className="card"
+    >
+      <div
+        className="card-body flex"
+      >
+        <button
+          className="btn btn-plus"
+          onClick={[Function]}
+        >
+          <p
+            className="card-text plus"
+          >
+            +
+          </p>
+          <p
+            className="card-text plus-add"
+          >
+            Add new appliance
+          </p>
+        </button>
+      </div>
+    </div>
+  </main>,
+]
+`;

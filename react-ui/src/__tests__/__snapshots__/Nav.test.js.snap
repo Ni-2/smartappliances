@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders navigation with link 1`] = `
+<nav
+  aria-label="breadcrumb"
+  className="breadcrumb-main"
+>
+  <ol
+    className="breadcrumb"
+  >
+    <li
+      className="breadcrumb-item"
+    >
+      <button
+        class="btn btn-link my-btn-home"
+        onClick={[Function]}
+        type="button"
+      >
+        My Smart Appliances
+      </button>
+    </li>
+    <li
+      aria-current="page"
+      className="breadcrumb-item active"
+    >
+      my device
+    </li>
+  </ol>
+</nav>
+`;
+
+exports[`renders navigation without link 1`] = `
+<nav
+  aria-label="breadcrumb"
+  className="breadcrumb-main"
+>
+  <ol
+    className="breadcrumb"
+  >
+    <li
+      aria-current="page"
+      className="breadcrumb-item active"
+    >
+      my cards
+    </li>
+  </ol>
+</nav>
+`;
