@@ -68,9 +68,7 @@ function NewApplianceSuccess(props) {
   const { addNewAppliance, toggleToAppliance, serial, newApplType } = props;
   return (
     <div className="alert alert-success" role="alert">
-      <h4 className="alert-heading" data-testid="done">
-        Well done!
-      </h4>
+      <h4 className="alert-heading">Well done!</h4>
       <p className="mb-0 flex al-i-base">
         <button
           className="btn btn-link color-unset pad-rev"

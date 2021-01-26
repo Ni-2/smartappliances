@@ -69,27 +69,4 @@ describe('interactions', () => {
     fireEvent.click(screen.getByText('Start'));
     await waitFor(() => expect(screen.getByRole('combobox')).toHaveValue('default'));
   });
-
-  it('sets users description', async () => {
-    server.use(
-      rest.post('/api/newDescription', (req, res, ctx) => {
-        return res(ctx.status(200), ctx.json(cards));
-      }),
-    );
-
-    render(
-      <Appliance
-        value={cards['201']}
-        toggleToAppliance={() => 'function toggleToAppliance'}
-        url="/api"
-        id="201"
-        setCards={() => cards}
-      />,
-    );
-
-    expect(document.querySelector('.collapse')).toHaveClass('m-lr-1rem');
-    expect(document.querySelector('.collapse')).not.toHaveClass('show');
-    fireEvent.click(document.querySelector("button[data-bs-toggle='collapse']"));
-    await waitFor(() => expect(document.querySelector('.collapse')).toHaveClass('show'));
-  });
 });
