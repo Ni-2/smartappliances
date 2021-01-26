@@ -61,7 +61,9 @@ Array [
           </b>
           <span
             className="green"
-          />
+          >
+            available
+          </span>
         </p>
       </div>
     </div>
@@ -98,7 +100,9 @@ Array [
           </b>
           <span
             className="green"
-          />
+          >
+            available
+          </span>
         </p>
       </div>
     </div>
@@ -135,7 +139,9 @@ Array [
           </b>
           <span
             className="green"
-          />
+          >
+            available
+          </span>
         </p>
       </div>
     </div>

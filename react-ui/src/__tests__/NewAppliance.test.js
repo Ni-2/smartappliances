@@ -1,29 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import NewAppliance from '../NewAppliance';
-
-const server = setupServer(
-  rest.post('/api', (req, res, ctx) => {
-    return res(ctx.status(204));
-  }),
-);
-
-beforeAll(() => server.listen());
-
-afterEach(() => server.resetHandlers());
-
-afterAll(() => server.close());
-
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<NewAppliance />, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
 
 it('renders form', () => {
   const component = renderer.create(
@@ -38,27 +19,84 @@ it('renders form', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('handlers server error', async () => {
-  server.use(
-    rest.get('/api', (req, res, ctx) => {
-      return res(ctx.status(500));
+describe('interactions', () => {
+  const server = setupServer(
+    rest.post('/api', (req, res, ctx) => {
+      return res(ctx.status(204));
     }),
   );
 
-  render(
-    <NewAppliance
-      addNewAppliance={() => 'function addNewAppliance'}
-      toggleToAppliance={() => 'function toggleToAppliance'}
-      url="/api"
-      setCards={() => 'function setCards'}
-    />,
-  );
+  beforeAll(() => server.listen());
 
-  fireEvent.click(screen.getByText('Submit'));
+  afterEach(() => server.resetHandlers());
 
-  await waitFor(() => screen.getAllByRole('invalid-feedback'));
+  afterAll(() => server.close());
 
-  expect(screen.getByRole('invalid-feedback')).toHaveTextContent(
-    'Oops! Something is wrong. Please, try again.',
-  );
+  it('gets error: nonexistant serial', async () => {
+    render(
+      <NewAppliance
+        addNewAppliance={() => 'function addNewAppliance'}
+        toggleToAppliance={() => 'function toggleToAppliance'}
+        url="/api"
+        setCards={() => 'function setCards'}
+      />,
+    );
+
+    fireEvent.click(screen.getByText('Submit'));
+
+    await waitFor(() => screen.getAllByRole('invalid-feedback'));
+
+    expect(screen.getByRole('invalid-feedback')).toHaveTextContent(
+      'Oops! Something is wrong. Please, try again.',
+    );
+  });
+
+  it('gets error: already added serial', async () => {
+    server.use(
+      rest.post('/api', (req, res, ctx) => {
+        return res(ctx.status(200), ctx.text('This serial has been already added.'));
+      }),
+    );
+
+    render(
+      <NewAppliance
+        addNewAppliance={() => 'function addNewAppliance'}
+        toggleToAppliance={() => 'function toggleToAppliance'}
+        url="/api"
+        setCards={() => 'function setCards'}
+      />,
+    );
+
+    fireEvent.click(screen.getByText('Submit'));
+
+    await waitFor(() => screen.getAllByRole('invalid-feedback'));
+
+    expect(screen.getByRole('invalid-feedback')).toHaveTextContent(
+      'This serial has been already added.',
+    );
+  });
+
+  it('gets error: already added serial', async () => {
+    server.use(
+      rest.post('/api', (req, res, ctx) => {
+        return res(ctx.status(201), ctx.json({ serial: { name: 'Teapot' } }));
+      }),
+    );
+
+    render(
+      <NewAppliance
+        addNewAppliance={() => 'function addNewAppliance'}
+        toggleToAppliance={() => 'function toggleToAppliance'}
+        url="/api"
+        setCards={() => 'function setCards'}
+      />,
+    );
+
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'serial' } });
+    fireEvent.click(screen.getByText('Submit'));
+
+    await waitFor(() => screen.getAllByRole('heading'));
+
+    expect(screen.getByRole('heading')).toHaveTextContent('Well done!');
+  });
 });

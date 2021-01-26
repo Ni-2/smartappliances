@@ -61,7 +61,7 @@
     },
     "model": "EW8F1R48B",
     "usersDescription": "in my bathroom",
-    "status": "available"
+    "applState": "available"
   },
   "201": {
     "name": "Oven",
@@ -124,7 +124,7 @@
       }
     },
     "model": "KOAAS31WT",
-    "status": "available"
+    "applState": "available"
   },
   "301": {
     "name": "Coffee Maker",
@@ -167,6 +167,6 @@
       }
     },
     "model": "KBC65T",
-    "status": "available"
+    "applState": "available"
   }
 }

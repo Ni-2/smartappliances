@@ -7,7 +7,7 @@ export default function Nav(props) {
       <ol className="breadcrumb">
         {hasLink && (
           <li className="breadcrumb-item">
-            <button type="button" class="btn btn-link my-btn-home" onClick={() => goToCards()}>
+            <button type="button" className="btn btn-link my-btn-home" onClick={() => goToCards()}>
               My Smart Appliances
             </button>
           </li>
