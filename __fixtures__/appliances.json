@@ -1,7 +1,7 @@
 {
   "EW8F1R48B": {
-    "name": "Wash Machine",
-    "image": "static/images/wash_machine_PerfectCare_800_EW8F1R48B_1.jpg",
+    "name": "Washing Machine",
+    "image": "static/images/washing_machine_PerfectCare_800_EW8F1R48B_1.jpg",
     "tasks": {
       "cotton": "Хлопок",
       "cotton-eco": "Хлопок Эко",

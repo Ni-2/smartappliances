@@ -58,7 +58,7 @@ describe('interactions', () => {
     expect(screen.getByText('+')).toBeInTheDocument();
 
     // Set description
-    fireEvent.click(screen.getByText('Wash Machine'));
+    fireEvent.click(screen.getByText('Washing Machine'));
     fireEvent.click(screen.getByText('Set my description'));
     const input = await screen.findByPlaceholderText('new description');
     fireEvent.change(input, { target: { value: 'in my bathroom' } });
@@ -73,10 +73,10 @@ describe('interactions', () => {
     expect(screen.getByText('+')).toBeInTheDocument();
 
     // Delete appliance
-    fireEvent.click(screen.getByText('Wash Machine'));
+    fireEvent.click(screen.getByText('Washing Machine'));
     fireEvent.click(screen.getByText('Delete appliance'));
     await waitFor(() => screen.getByText('+'));
-    expect(screen.queryByText('Wash Machine')).not.toBeInTheDocument();
+    expect(screen.queryByText('Washing Machine')).not.toBeInTheDocument();
 
     // Add appliance one again
     fireEvent.click(screen.getByRole('button'));
@@ -86,7 +86,7 @@ describe('interactions', () => {
     expect(screen.getByText('Well done!')).toBeInTheDocument();
 
     // Go to appliance
-    fireEvent.click(screen.getByText('Wash Machine'));
+    fireEvent.click(screen.getByText('Washing Machine'));
     expect(screen.getByText('Set my description')).toBeInTheDocument();
   });
 });
