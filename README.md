@@ -5,7 +5,11 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/5c2375bb750c56c72398/maintainability)](https://codeclimate.com/github/Ni-2/smartappliances/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/5c2375bb750c56c72398/test_coverage)](https://codeclimate.com/github/Ni-2/smartappliances/test_coverage)
 
-The simple service for home smart appliances.
+The simple service for home smart appliances (the training project).
+
+It's available here: [SmartAppliances](https://smartappliances.herokuapp.com)
+
+### Description
 
 Three models of appliances are available now: washing machine, oven, and coffee machine.
 
