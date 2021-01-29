@@ -9,7 +9,7 @@ The simple service for home smart appliances (the training project).
 
 It's available here: [SmartAppliances](https://smartappliances.herokuapp.com)
 
-### Description
+## Description
 
 Three models of appliances are available now: washing machine, oven, and coffee machine.
 
